@@ -69,7 +69,13 @@
                     <td>{{ $student->name }}</td>
                     <td>{{ $student->department }}</td>
                     <td>{{ $student->gender }}</td>
-                    <td>{{ $student->skill }}</td>
+                    @php
+                        $skills = json_decode($student->skill, true);
+                    @endphp
+                    <td>
+                        {{ is_array($skills) ? implode(', ', array_filter($skills)) : 'No Skills' }}
+                    </td>
+
                     <td>{{ $student->mobile }}</td>
                     <td>
                         <a href="{{ route('students.edit', $student->id) }}" class="btn btn-warning btn-sm">Edit</a>
